@@ -1,0 +1,15 @@
+{
+  "width": 27,
+  "height": 27,
+  "numOfCarnisters": 13,
+  "numOfDiamonds": 20,
+  "numOfTorches": 3,
+  "numOfTraps": 15,
+  "numOfRocks": 100,
+  "numOfZombies": 3,
+  "carnisterCapacity": 11,
+  "minerStartFuel": 30,
+  "minerVisibility": 4,
+  "diamondsPoints": 30,
+  "torchVisibility": 3
+}
