@@ -8,14 +8,14 @@ public class OptionsParser {
 
     private int width;
     private int height;
-    private int numOfCarnisters;
+    private int numOfCanisters;
     private int numOfDiamonds;
     private int numOfTorches;
     private int numOfTraps;
     private int numOfRocks;
     private int numOfZombies;
     private int numOfWormholes;
-    private int carnisterCapacity;
+    private int canisterCapacity;
     private double minerStartFuel;
     private double minerVisibility;
     private int diamondsPoints;
@@ -25,28 +25,28 @@ public class OptionsParser {
     public static OptionsParser loadPropFromFile() throws FileNotFoundException,IllegalArgumentException {
         Gson gson = new Gson();
         OptionsParser parameters = gson.fromJson(new FileReader("src\\agh\\cs\\miner\\parameters.json"), OptionsParser.class);
-        parameters.validate();
+        parameters.validateData();
         return parameters;
     }
 
-    public void validate() throws IllegalArgumentException{
+    public void validateData() throws IllegalArgumentException{
         if(this.width <= 0){ throw new IllegalArgumentException("Invalid map width");}
         if(this.height <= 0){ throw new IllegalArgumentException("Invalid map height");}
-        if(this.numOfCarnisters <= 0){ throw new IllegalArgumentException("Invalid number of carnisters");}
+        if(this.numOfCanisters <= 0){ throw new IllegalArgumentException("Invalid number of canisters");}
         if(this.numOfDiamonds <= 0){ throw new IllegalArgumentException("Invalid number of diamonds");}
         if(this.numOfTorches <= 0){ throw new IllegalArgumentException("Invalid number of torches");}
         if(this.numOfRocks <= 0){ throw new IllegalArgumentException("Invalid number of rocks");}
         if(this.numOfZombies <= 0){ throw new IllegalArgumentException("Invalid number of zombies");}
         if(this.numOfWormholes <= 0){ throw new IllegalArgumentException("Invalid number of wormholes");}
-        if(this.carnisterCapacity <= 0){ throw new IllegalArgumentException("Invalid carnister capacity");}
+        if(this.canisterCapacity <= 0){ throw new IllegalArgumentException("Invalid canister capacity");}
         if(this.minerStartFuel <= 0){ throw new IllegalArgumentException("Invalid miner start fuel");}
         if(this.minerVisibility <= 0){ throw new IllegalArgumentException("Invalid miner visibility");}
         if(this.diamondsPoints <= 0){ throw new IllegalArgumentException("Invalid diamond points");}
         if(this.torchVisibility <= 0){ throw new IllegalArgumentException("Invalid torch visibility");}
     }
 
-    public int getCarnisterCapacity() {
-        return carnisterCapacity;
+    public int getCanisterCapacity() {
+        return canisterCapacity;
     }
 
     public int getDiamondsPoints() {
@@ -65,8 +65,8 @@ public class OptionsParser {
         return minerStartFuel;
     }
 
-    public int getNumOfCarnisters() {
-        return numOfCarnisters;
+    public int getNumOfCanisters() {
+        return numOfCanisters;
     }
 
     public int getNumOfDiamonds() {

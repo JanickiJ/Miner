@@ -16,7 +16,7 @@ public class CaveGenerator {
     }
 
     public void generateMap(){
-        addCarnisters();
+        addCanister();
         addDiamonds();
         addRocks();
         addTorches();
@@ -38,11 +38,11 @@ public class CaveGenerator {
         return vector;
     }
 
-    public void addCarnisters() {
-        int i = data.getNumOfCarnisters();
+    public void addCanister() {
+        int i = data.getNumOfCanisters();
         while(i >0){
-            Carnister carnister = new Carnister(getRandomVector(), data.getCarnisterCapacity());
-            map.addObject(carnister);
+            Canister canister = new Canister(getRandomVector(), data.getCanisterCapacity());
+            map.addObject(canister);
             i--;
         }
     }
