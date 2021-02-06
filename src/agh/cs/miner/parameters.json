@@ -7,6 +7,7 @@
   "numOfTraps": 15,
   "numOfRocks": 100,
   "numOfZombies": 3,
+  "numOfWormholes": 2,
   "carnisterCapacity": 11,
   "minerStartFuel": 30,
   "minerVisibility": 4,

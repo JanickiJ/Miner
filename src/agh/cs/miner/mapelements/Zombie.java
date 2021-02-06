@@ -11,7 +11,7 @@ public class Zombie extends AbstractMapElement {
             this.visibility =0;
             this.isMovable = true;
             this.points =0;
-            this.image = new Image("resources/agh/cs/miner/zombie.png");
+            this.image = new Image(imagePath + "zombie.png");
             this.canGoThrough = true;
         }
 

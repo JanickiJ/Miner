@@ -10,7 +10,7 @@ public class Rock extends AbstractMapElement {
         this.visibility =0;
         this.points =0;
         this.isMovable = false;
-        this.image = new Image( "resources/agh/cs/miner/rock.png");
+        this.image = new Image( imagePath + "rock.png");
         this.canGoThrough = false;
     }
 }

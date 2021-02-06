@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 public class Miner extends AbstractMapElement {
     private boolean torchON;
+    private boolean isInWormhole;
 
     public Miner(Vector2d position, double visibility, double fuel){
         this.position = position;
@@ -12,9 +13,10 @@ public class Miner extends AbstractMapElement {
         this.visibility =visibility;
         this.points =0;
         this.isMovable = true;
-        this.image = new Image("resources/agh/cs/miner/miner.png");
+        this.image = new Image(imagePath + "miner.png");
         this.canGoThrough = true;
         this.torchON = true;
+        this.isInWormhole = false;
     }
 
     public double getVisibility() {
@@ -32,5 +34,13 @@ public class Miner extends AbstractMapElement {
 
     public boolean isTorchON() {
         return torchON;
+    }
+
+    public void inWormhole() {
+        isInWormhole = !isInWormhole;
+    }
+
+    public boolean isInWormhole() {
+        return isInWormhole;
     }
 }

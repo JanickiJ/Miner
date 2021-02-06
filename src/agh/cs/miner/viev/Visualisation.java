@@ -29,6 +29,7 @@ public class Visualisation {
     private final BorderPane bPane;
     private final HBox statisticPanel;
     private final Scene scene;
+    private final String path = "resources/agh/cs/miner/";
 
     public Visualisation(OptionsParser parameters) {
 
@@ -46,11 +47,22 @@ public class Visualisation {
 
     }
 
-    private void newGame(){
+    private void newGame(boolean isContinuation){
+        int earnedPoints = map.getMiner().getPoints();
+        double earnedFuel = map.getMiner().getFuel();
         this.map =  new Cave(parameters);
+        if(isContinuation) {
+            this.map.getMiner().addPoints(earnedPoints);
+            this.map.getMiner().addFuel(earnedFuel - parameters.getMinerStartFuel());
+        }
+
     }
 
     private void drawBorderPane() {
+        if(map.getMiner().isInWormhole()){
+            newGame(true);
+        }
+
         if(map.minerHasFuel() && !map.win()){
             drawBackground();
             drawMap();
@@ -63,7 +75,7 @@ public class Visualisation {
     }
 
     private void drawBackground() {
-        Image mapImage = new Image("resources/agh/cs/miner/map.png");
+        Image mapImage = new Image(path + "map.png");
         gridPane.getChildren().clear();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -76,7 +88,7 @@ public class Visualisation {
     }
 
     private void drawMap() {
-        Image blackImage = new Image("resources/agh/cs/miner/black.png");
+        Image blackImage = new Image(path + "black.png");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 Vector2d vector2d = new Vector2d(i, j);
@@ -121,14 +133,14 @@ public class Visualisation {
         ImageView imageView;
 
         if (map.win()){
-            result = new Image("resources/agh/cs/miner/win.png");
+            result = new Image(path + "win.png");
             imageView = new ImageView(result);
             imageView.setFitHeight(150);
             imageView.setFitWidth(150);
 
         }
         else {
-            result = new Image("resources/agh/cs/miner/GameOver.png");
+            result = new Image(path + "GameOver.png");
             imageView = new ImageView(result);
             imageView.setFitHeight(60);
             imageView.setFitWidth(200);
@@ -150,7 +162,7 @@ public class Visualisation {
         Button button = new Button();
         button.setAlignment(Pos.CENTER_RIGHT);
         button.setOnAction(e -> map.torchONOFF());
-        Image image = new Image("resources/agh/cs/miner/torch.png");
+        Image image = new Image(path + "torch.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(25);
         imageView.setPreserveRatio(true);
@@ -163,10 +175,11 @@ public class Visualisation {
         Button button = new Button();
         button.setAlignment(Pos.CENTER);
         button.setOnAction(e -> {
-            newGame();
+            newGame(false);
             drawBorderPane();
         });
-        Image image = new Image("resources/agh/cs/miner/replay.png");
+
+        Image image = new Image(path + "replay.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(70);
         imageView.setPreserveRatio(true);
@@ -194,4 +207,5 @@ public class Visualisation {
     public Scene getScene() {
         return scene;
     }
+
 }

@@ -10,7 +10,7 @@ public class Torch extends AbstractMapElement {
         this.visibility =visibility;
         this.points =0;
         this.isMovable = false;
-        this.image = new Image("resources/agh/cs/miner/torch.png");
+        this.image = new Image(imagePath + "torch.png");
         this.canGoThrough = false;
     }
 }

@@ -22,6 +22,7 @@ public class CaveGenerator {
         addTorches();
         addTraps();
         addZombies();
+        addWormholes();
         addMiner();
     }
 
@@ -87,6 +88,15 @@ public class CaveGenerator {
         while (i>0){
             Zombie zombie = new Zombie(getRandomVector());
             map.addObject(zombie);
+            i--;
+        }
+    }
+
+    private void addWormholes(){
+        int i = data.getNumOfWormholes();
+        while (i>0){
+            Wormhole wormhole = new Wormhole(getRandomVector());
+            map.addObject(wormhole);
             i--;
         }
     }

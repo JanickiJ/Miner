@@ -15,6 +15,7 @@ public abstract class AbstractMapElement implements IMapElement {
     protected int points;
     protected boolean isMovable;
     protected boolean canGoThrough;
+    protected String imagePath = "resources/agh/cs/miner/";
     private final List<IPositionChangeObserver> observers = new LinkedList<>();
 
 

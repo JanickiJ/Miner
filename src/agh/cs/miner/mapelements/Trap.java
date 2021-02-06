@@ -10,7 +10,7 @@ public class Trap extends AbstractMapElement {
         this.visibility =0;
         this.points =0;
         this.isMovable = false;
-        this.image = new Image("resources/agh/cs/miner/trap2.png");
+        this.image = new Image(imagePath + "trap2.png");
         this.canGoThrough = true;
     }
 }

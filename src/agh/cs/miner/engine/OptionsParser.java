@@ -1,8 +1,6 @@
 package agh.cs.miner.engine;
 
 import com.google.gson.Gson;
-
-
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 
@@ -16,6 +14,7 @@ public class OptionsParser {
     private int numOfTraps;
     private int numOfRocks;
     private int numOfZombies;
+    private int numOfWormholes;
     private int carnisterCapacity;
     private double minerStartFuel;
     private double minerVisibility;
@@ -38,6 +37,7 @@ public class OptionsParser {
         if(this.numOfTorches <= 0){ throw new IllegalArgumentException("Invalid number of torches");}
         if(this.numOfRocks <= 0){ throw new IllegalArgumentException("Invalid number of rocks");}
         if(this.numOfZombies <= 0){ throw new IllegalArgumentException("Invalid number of zombies");}
+        if(this.numOfWormholes <= 0){ throw new IllegalArgumentException("Invalid number of wormholes");}
         if(this.carnisterCapacity <= 0){ throw new IllegalArgumentException("Invalid carnister capacity");}
         if(this.minerStartFuel <= 0){ throw new IllegalArgumentException("Invalid miner start fuel");}
         if(this.minerVisibility <= 0){ throw new IllegalArgumentException("Invalid miner visibility");}
@@ -99,5 +99,9 @@ public class OptionsParser {
 
     public int getWinScore(){
         return diamondsPoints*numOfDiamonds;
+    }
+
+    public int getNumOfWormholes() {
+        return numOfWormholes;
     }
 }

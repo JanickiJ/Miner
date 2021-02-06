@@ -6,17 +6,17 @@ import agh.cs.miner.engine.OptionsParser;
 import agh.cs.miner.mapelements.IMapElement;
 import agh.cs.miner.mapelements.IPositionChangeObserver;
 import agh.cs.miner.mapelements.Miner;
-import agh.cs.miner.mapelements.Zombie;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
 
 public class Cave implements IPositionChangeObserver {
     private final Vector2d lowerLeft;
     private final Vector2d upperRight;
     private final Map<Vector2d, IMapElement> map;
     private Miner miner;
+    private final CaveSimulation caveSimulation;
     private final OptionsParser optionsParser;
     private final LinkedList<IMapElement> lightSources;
     private final LinkedList<IMapElement> movableIMapElements;
@@ -30,6 +30,7 @@ public class Cave implements IPositionChangeObserver {
         this.movableIMapElements = new LinkedList<>();
         CaveGenerator generator = new CaveGenerator(this,optionsParser);
         generator.generateMap();
+        this.caveSimulation = new CaveSimulation(this);
     }
 
 
@@ -60,47 +61,10 @@ public class Cave implements IPositionChangeObserver {
         iMapElement.addObserver(this);
     }
 
-    public void moveZombie(IMapElement iMapElement){
-        Direction direction = Direction.DOWN.randomDirection();
-        Vector2d newPosition = iMapElement.getPosition().add(direction.toUnitVector());
-
-        if(canMoveTo(newPosition)){
-            if(!isObjectAt(newPosition)){
-                iMapElement.move(direction);
-            }
-            else if(objectAt(newPosition) == miner) {
-                miner.addFuel(iMapElement.getFuel());
-            }
-        }
-    }
-
-    public void moveMap(Direction direction){
-        moveMiner(direction);
-        for(IMapElement iMapElement: movableIMapElements){
-            if(iMapElement instanceof Zombie){
-                moveZombie(iMapElement);
-            }
-        }
-    }
-
-    public void moveMiner(Direction direction) {
-        Vector2d newPosition = miner.getPosition().add(direction.toUnitVector());
-        spendFuel();
-        if (canMoveTo(newPosition)){
-            if(isObjectAt(newPosition)) {
-                IMapElement objectAt = objectAt(newPosition);
-                miner.addFuel(objectAt.getFuel());
-                miner.addPoints(objectAt.getPoints());
-                removeObject(objectAt);
-            }
-            miner.move(direction);
-        }
-        miner.setVisibility(optionsParser.getMinerStartFuel(), optionsParser.getMinerVisibility());
-    }
-
     public boolean inBorders(Vector2d position){
         return (position.precedes(upperRight) && position.follows(lowerLeft));
     }
+
     public boolean isVisible(Vector2d vector2d){
         for(IMapElement light: lightSources){
             if (light.getPosition().distance(vector2d) <= light.getVisibility()) return true;
@@ -108,14 +72,18 @@ public class Cave implements IPositionChangeObserver {
         return false;
     }
 
+
+
+
+
+    public void moveMap(Direction direction){
+        caveSimulation.moveMap(direction);
+    }
+
     public void torchONOFF(){
         miner.torchONOFF();
     }
-    public void spendFuel(){
-        if(miner.isTorchON()){
-            miner.addFuel(-1);
-        }
-    }
+
     public boolean win(){
         return optionsParser.getWinScore() == getScore();
     }
@@ -133,6 +101,18 @@ public class Cave implements IPositionChangeObserver {
     }
     public boolean minerHasFuel(){
         return miner.getFuel()>0;
+    }
+
+    public Miner getMiner(){
+        return miner;
+    }
+
+    public LinkedList<IMapElement> getMovableIMapElements() {
+        return movableIMapElements;
+    }
+
+    public OptionsParser getOptionsParser() {
+        return optionsParser;
     }
 
     @Override

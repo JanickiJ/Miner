@@ -11,7 +11,7 @@ public class Diamond extends AbstractMapElement  {
     this.visibility =0;
     this.points =points;
     this.isMovable = false;
-    this.image = new Image("resources/agh/cs/miner/diamond.png");
+    this.image = new Image(imagePath + "diamond.png");
     this.canGoThrough = true;
   }
 }

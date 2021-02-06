@@ -5,16 +5,19 @@ import agh.cs.miner.basics.Vector2d;
 import javafx.scene.image.Image;
 
 public interface IMapElement {
+
     double getFuel();
     double getVisibility();
     int getPoints();
+    Vector2d getPosition();
+    Image getImage();
+
     void addPoints(int points);
     void addFuel(double fuel);
-    Image getImage();
-    boolean canGoThrough();
-    Vector2d getPosition();
-    boolean isLightSource();
     void move(Direction direction);
+
+    boolean canGoThrough();
+    boolean isLightSource();
     boolean isMovable();
 
     void addObserver(IPositionChangeObserver iPositionChangeObserver);
