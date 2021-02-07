@@ -1,6 +1,6 @@
 # Miner
 
-Simple 2d consist of moving miner in dark and full of danger cave. Was made with the purpose of broaden knowledge of Java nad JavaFX.
+Simple 2d game consist of moving miner in dark and full of danger cave. Was made with the purpose of broaden knowledge of Java nad JavaFX.
 
 ## Technologies
 
