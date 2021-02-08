@@ -22,27 +22,30 @@ public class OptionsParser {
     private int torchVisibility;
 
 
-    public static OptionsParser loadPropFromFile() throws FileNotFoundException,IllegalArgumentException {
+    public static OptionsParser loadPropFromFile(String path) throws FileNotFoundException,IllegalArgumentException {
         Gson gson = new Gson();
-        OptionsParser parameters = gson.fromJson(new FileReader("src\\agh\\cs\\miner\\parameters.json"), OptionsParser.class);
-        parameters.validateData();
+        OptionsParser parameters = gson.fromJson(new FileReader(path), OptionsParser.class);
+        parameters.testData();
         return parameters;
     }
 
-    public void validateData() throws IllegalArgumentException{
-        if(this.width <= 0){ throw new IllegalArgumentException("Invalid map width");}
-        if(this.height <= 0){ throw new IllegalArgumentException("Invalid map height");}
-        if(this.numOfCanisters <= 0){ throw new IllegalArgumentException("Invalid number of canisters");}
-        if(this.numOfDiamonds <= 0){ throw new IllegalArgumentException("Invalid number of diamonds");}
-        if(this.numOfTorches <= 0){ throw new IllegalArgumentException("Invalid number of torches");}
-        if(this.numOfRocks <= 0){ throw new IllegalArgumentException("Invalid number of rocks");}
-        if(this.numOfZombies <= 0){ throw new IllegalArgumentException("Invalid number of zombies");}
-        if(this.numOfWormholes <= 0){ throw new IllegalArgumentException("Invalid number of wormholes");}
-        if(this.canisterCapacity <= 0){ throw new IllegalArgumentException("Invalid canister capacity");}
-        if(this.minerStartFuel <= 0){ throw new IllegalArgumentException("Invalid miner start fuel");}
-        if(this.minerVisibility <= 0){ throw new IllegalArgumentException("Invalid miner visibility");}
-        if(this.diamondsPoints <= 0){ throw new IllegalArgumentException("Invalid diamond points");}
-        if(this.torchVisibility <= 0){ throw new IllegalArgumentException("Invalid torch visibility");}
+    public void testData() throws IllegalArgumentException{
+        String incorrect = "Incorrect data: ";
+        if(width <= 0){ throw new IllegalArgumentException(incorrect + "map width");}
+        if(height <= 0){ throw new IllegalArgumentException(incorrect + "map height");}
+        if(numOfCanisters <= 0){ throw new IllegalArgumentException(incorrect + "number of canisters");}
+        if(numOfDiamonds <= 0){ throw new IllegalArgumentException(incorrect + "number of diamonds");}
+        if(numOfTorches <= 0){ throw new IllegalArgumentException(incorrect + "number of torches");}
+        if(numOfRocks <= 0){ throw new IllegalArgumentException(incorrect + "number of rocks");}
+        if(numOfZombies <= 0){ throw new IllegalArgumentException(incorrect + "number of zombies");}
+        if(numOfWormholes <= 0){ throw new IllegalArgumentException(incorrect + "number of wormholes");}
+        if(canisterCapacity <= 0){ throw new IllegalArgumentException(incorrect + "canister capacity");}
+        if(minerStartFuel <= 0){ throw new IllegalArgumentException(incorrect + "miner start fuel");}
+        if(minerVisibility <= 0){ throw new IllegalArgumentException(incorrect + "miner visibility");}
+        if(diamondsPoints <= 0){ throw new IllegalArgumentException(incorrect + "diamond points");}
+        if(torchVisibility <= 0){ throw new IllegalArgumentException(incorrect + "torch visibility");}
+        int mapObjects = numOfCanisters + numOfDiamonds + numOfTorches + numOfRocks + numOfZombies + numOfWormholes + 1;
+        if(mapObjects > width * height){ throw new IllegalArgumentException("To many objects");}
     }
 
     public int getCanisterCapacity() {

@@ -18,7 +18,12 @@ public abstract class AbstractMapElement implements IMapElement {
     protected String imagePath = "resources/agh/cs/miner/";
     private final List<IPositionChangeObserver> observers = new LinkedList<>();
 
-
+    @Override
+    public void move(Direction direction){
+        positionWillChanged();
+        position = position.add(direction.toUnitVector());
+        positionChanged();
+    }
 
     @Override
     public double getFuel() {
@@ -68,13 +73,6 @@ public abstract class AbstractMapElement implements IMapElement {
     @Override
     public boolean isMovable(){
         return isMovable;
-    }
-
-    @Override
-    public void move(Direction direction){
-        positionWillChanged();
-        position = position.add(direction.toUnitVector());
-        positionChanged();
     }
 
     public void positionChanged(){

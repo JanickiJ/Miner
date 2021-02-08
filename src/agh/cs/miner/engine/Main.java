@@ -13,9 +13,10 @@ public class Main extends Application {
     private OptionsParser parameters;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+        String parametersPath = "src\\agh\\cs\\miner\\parameters.json";
         try {
-            parameters = loadPropFromFile();
+            parameters = loadPropFromFile(parametersPath);
         } catch (IllegalArgumentException | FileNotFoundException ex) {
             System.out.println(ex);
         }

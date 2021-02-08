@@ -24,7 +24,7 @@ public enum Direction {
             case 1 -> RIGHT;
             case 2 -> UP;
             case 3 -> DOWN;
-            default -> throw new IllegalStateException("Unexpected value: " + random.nextInt(3));
+            default -> throw new IllegalStateException("Unexpected direction value");
         };
     }
 

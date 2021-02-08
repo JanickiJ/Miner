@@ -96,8 +96,8 @@ public class Visualisation {
 
                 if (map.isVisible(vector2d)) {
                     if (map.isObjectAt(vector2d)) {
-                        Image image = map.objectAt(vector2d).getImage();
-                        rectangle.setFill(new ImagePattern(image));
+                        Image objectImage = map.objectAt(vector2d).getImage();
+                        rectangle.setFill(new ImagePattern(objectImage));
                         gridPane.add(rectangle, i * squareSize, j * squareSize);
                     }
                 }
